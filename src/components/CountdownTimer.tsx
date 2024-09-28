@@ -5,13 +5,17 @@ interface CountdownProps {
   eventTime: string;
 }
 
-const CountdownTimer: React.FC<CountdownProps> = ({ eventTime }) => {
-  const calculateTimeLeft = () => {
-    const difference = +new Date(eventTime) - +new Date();
-    let timeLeft = {};
+interface TimeLeft {
+  hours: number;
+  minutes: number;
+  seconds: number;
+}
 
+const CountdownTimer: React.FC<CountdownProps> = ({ eventTime }) => {
+  const calculateTimeLeft = (): TimeLeft | string => {
+    const difference = +new Date(eventTime) - +new Date();
     if (difference > 0) {
-      timeLeft = {
+      return {
         hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
         minutes: Math.floor((difference / 1000 / 60) % 60),
         seconds: Math.floor((difference / 1000) % 60),
@@ -21,11 +25,9 @@ const CountdownTimer: React.FC<CountdownProps> = ({ eventTime }) => {
     } else {
       return "The event has ended";
     }
-
-    return timeLeft;
   };
 
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+  const [timeLeft, setTimeLeft] = useState<TimeLeft | string>(calculateTimeLeft());
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -49,10 +51,10 @@ const CountdownTimer: React.FC<CountdownProps> = ({ eventTime }) => {
   }
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 gap-1 md:gap-2 justify-center max-w-[500px] ">
-      {renderTimeCircle((timeLeft as any).hours || "00", "Hours")}
-      {renderTimeCircle((timeLeft as any).minutes || "00", "Minutes")}
-      {renderTimeCircle((timeLeft as any).seconds || "00", "Seconds")}
+    <div className="grid grid-cols-2 md:grid-cols-3 gap-1 md:gap-2 justify-center max-w-[500px]">
+      {renderTimeCircle(timeLeft.hours, "Hours")}
+      {renderTimeCircle(timeLeft.minutes, "Minutes")}
+      {renderTimeCircle(timeLeft.seconds, "Seconds")}
     </div>
   );
 };

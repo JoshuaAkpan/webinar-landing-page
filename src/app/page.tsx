@@ -52,7 +52,7 @@ export default function Home() {
 
             <div className="text-center text-sm md:text-base">
               Day 5 Will Expire Soon... <br />
-              Get Your "All Access Pass" Now
+              Get Your &quot;All Access Pass&quot; Now
             </div>
             <button className="bg-green-500 w-[80px] md:w-[100px] h-20 hover:bg-green-600 rounded-md px-5">
               Join Now!
