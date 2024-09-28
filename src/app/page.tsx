@@ -33,7 +33,7 @@ export default function Home() {
   const eventTime = "2024-12-31T23:59:59"; // Set the event date and time
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center">
       <header className="w-full">
         <div className="bg-black h-[100px]"></div>
 
