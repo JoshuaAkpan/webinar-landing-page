@@ -1,4 +1,5 @@
-"use client";
+"use client"
+
 import React, { useState, useEffect } from "react";
 
 interface CountdownProps {
@@ -6,6 +7,7 @@ interface CountdownProps {
 }
 
 interface TimeLeft {
+  days: number;
   hours: number;
   minutes: number;
   seconds: number;
@@ -16,6 +18,7 @@ const CountdownTimer: React.FC<CountdownProps> = ({ eventTime }) => {
     const difference = +new Date(eventTime) - +new Date();
     if (difference > 0) {
       return {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
         hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
         minutes: Math.floor((difference / 1000 / 60) % 60),
         seconds: Math.floor((difference / 1000) % 60),
@@ -51,7 +54,8 @@ const CountdownTimer: React.FC<CountdownProps> = ({ eventTime }) => {
   }
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 gap-1 md:gap-2 justify-center max-w-[500px]">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-2 justify-center max-w-[500px]">
+      {renderTimeCircle(timeLeft.days, "Days")}
       {renderTimeCircle(timeLeft.hours, "Hours")}
       {renderTimeCircle(timeLeft.minutes, "Minutes")}
       {renderTimeCircle(timeLeft.seconds, "Seconds")}
