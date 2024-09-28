@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useState, useEffect } from "react";
 
@@ -30,7 +30,9 @@ const CountdownTimer: React.FC<CountdownProps> = ({ eventTime }) => {
     }
   };
 
-  const [timeLeft, setTimeLeft] = useState<TimeLeft | string>(calculateTimeLeft());
+  const [timeLeft, setTimeLeft] = useState<TimeLeft | string>(
+    calculateTimeLeft()
+  );
 
   useEffect(() => {
     const timer = setTimeout(() => {
